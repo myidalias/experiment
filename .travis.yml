@@ -2,13 +2,7 @@ sudo: required
 services:
   - docker
 
-before_install:
-  - docker build -t myidalias/experiment-test -f Dockerfile.dev .
-
 script:
-  - docker run myidalias/experiment-test npm test -- --coverage
-
-after_success:
   - docker build -t myidalias/experiment .
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
